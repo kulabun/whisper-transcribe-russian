@@ -1,18 +1,17 @@
 from concurrent.futures import ThreadPoolExecutor
 from faster_whisper import WhisperModel
 
-model_names = ["tiny", "base", "small", "medium", "large-v1", "large-v2", "large-v3"]
+model_names = ["dvislobokov/faster-whisper-large-v3-turbo-russian"]
 
 
 def load_model(selected_model):
-    '''
+    """
     Load and cache models in parallel
-    '''
+    """
     for _attempt in range(5):
         while True:
             try:
-                loaded_model = WhisperModel(
-                    selected_model, device="cpu", compute_type="int8")
+                loaded_model = WhisperModel(selected_model, device="cpu", compute_type="int8")
             except (AttributeError, OSError):
                 continue
 
